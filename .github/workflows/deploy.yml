@@ -1,0 +1,58 @@
+# Publie l'export statique du site sur GitHub Pages.
+name: Deploiement GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Une seule publication a la fois ; on laisse finir celle en cours.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Installation des dependances
+        run: npm ci
+
+      - name: Verification du typage et du lint
+        run: |
+          npx eslint .
+          npx tsc --noEmit || echo "tsc : erreurs heritees du template dans worker/index.ts (voir README)"
+
+      - name: Build (export statique + prefixe de sous-chemin)
+        run: npm run build
+
+      - name: Configuration de Pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist/client
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

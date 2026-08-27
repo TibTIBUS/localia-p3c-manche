@@ -10,7 +10,8 @@ Construit à partir du template [`localia-template-plombier`](https://github.com
 - une page d'accueil : prestations, rénovation énergétique, qualifications, présentation de
   l'entreprise, zone d'intervention, FAQ et contact ;
 - une page `/mentions-legales` ;
-- `robots.txt` et `sitemap.xml` générés par Next.
+- une page 404 ;
+- un `robots.txt` statique (`public/robots.txt`).
 
 Le référencement local s'appuie sur des données structurées `schema.org`
 (`Plumber` + `HVACBusiness` avec adresse, SIREN et qualifications, et `FAQPage`).
@@ -22,10 +23,50 @@ nom, gérant, SIREN, téléphone, courriel, adresses, zone d'intervention, quali
 
 Le reste du contenu éditorial (prestations, FAQ) se trouve en haut de `app/page.tsx`.
 
+## Déploiement
+
+Le site est publié en **HTML statique sur GitHub Pages** :
+<https://tibtibus.github.io/localia-p3c-manche/>
+
+`.github/workflows/deploy.yml` build et publie à chaque push sur `main`.
+
+### Démonstration ou production
+
+`deployment` dans `app/business.ts` pilote les deux modes :
+
+| | `mode: "demo"` (actuel) | `mode: "prod"` |
+| --- | --- | --- |
+| Hébergement | GitHub Pages, sous-chemin | domaine dédié, racine |
+| `url` | l'URL github.io | le domaine de l'entreprise |
+| `basePath` | `/localia-p3c-manche` | `""` |
+| Indexation | `noindex` + `robots.txt` bloquant | à rouvrir |
+
+Le mode démo est volontairement non indexable : une copie provisoire ne doit
+pas faire doublon avec le futur site de l'entreprise dans Google.
+
+Pour passer en production : mettre `mode` à `"prod"`, renseigner `url`, vider
+`basePath`, remplacer `public/robots.txt` par une version autorisant
+l'indexation, et rétablir un `sitemap.xml`.
+
+### Le préfixe de sous-chemin
+
+GitHub Pages sert un site de projet depuis `/<nom-du-depot>/`. L'option Next
+`basePath` serait la réponse normale, mais **vinext ne sait pas pré-rendre avec
+`basePath`** : l'activer fait ignorer toutes les pages à l'export. Le préfixe
+est donc appliqué en deux endroits :
+
+- `base` de Vite dans `vite.config.ts` → assets et chunks chargés dynamiquement ;
+- `scripts/apply-basepath.mjs`, lancé en `postbuild` → liens de page dans le HTML.
+
+Ce script est idempotent et échoue le build s'il reste un chemin non préfixé ou
+préfixé deux fois. C'est aussi pourquoi la navigation interne utilise des `<a>`
+et non `next/link` : seul le HTML est réécrit, `next/link` garderait la route
+non préfixée côté client. La règle ESLint correspondante est désactivée avec
+ce motif dans `eslint.config.mjs`.
+
 ## À compléter avant mise en ligne
 
-- `business.url` dans `app/business.ts` : remplacer par le nom de domaine définitif
-  (il sert de base aux URL canoniques, à l'Open Graph et au sitemap).
+- Nom de domaine définitif : voir « Démonstration ou production » ci-dessus.
 - Photos : les visuels actuels proviennent de Pexels (libres de droits). Les remplacer par
   des photos de chantiers réels de l'entreprise renforcera nettement la page.
 - Horaires d'ouverture précis, coordonnées de l'assureur (RC pro / décennale), organisme
@@ -48,6 +89,9 @@ npm run lint    # ESLint
 - `npm run lint` s'appuie sur un `eslint.config.mjs` ajouté ici : le template n'en fournissait
   pas et la commande échouait. Il reste deux avertissements `no-img-element` (les photos
   distantes sont servies par de simples balises `<img>`, comme dans le template).
+- `app/robots.ts` et `app/sitemap.ts` ont été retirés : vinext les ignore en mode
+  `output: "export"` (aucun fichier généré), ce qui donnait une fausse impression de
+  couverture SEO. Leur contenu reste récupérable dans l'historique git.
 - `npx tsc --noEmit` signale deux erreurs dans `worker/index.ts` (`Fetcher`, `D1Database`) :
   les types Cloudflare Workers ne sont pas déclarés dans le template. Sans effet sur le
   build ni sur le déploiement.

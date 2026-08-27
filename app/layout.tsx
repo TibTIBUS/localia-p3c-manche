@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { business } from "./business";
+import { business, isDemo } from "./business";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -31,9 +31,11 @@ export const metadata: Metadata = {
     title: `${business.name} — Plomberie, chauffage et énergies renouvelables`,
     description: `Plombier chauffagiste qualifié RGE à ${business.city} (${business.postalCode}). Pompes à chaleur, granulés, gaz et chauffe-eau thermodynamiques.`,
   },
+  // La démonstration temporaire ne doit pas être indexée : elle ferait
+  // doublon avec le futur site de l'entreprise sur son propre domaine.
   robots: {
-    index: true,
-    follow: true,
+    index: !isDemo,
+    follow: !isDemo,
   },
   icons: {
     icon: "/favicon.svg",

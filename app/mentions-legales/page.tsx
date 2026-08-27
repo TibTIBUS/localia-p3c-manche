@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { ArrowLeft, Droplets } from "lucide-react";
 
-import { addresses, business, primaryAddress } from "../business";
+import { addresses, business, isDemo, primaryAddress } from "../business";
 
 export const metadata: Metadata = {
   title: "Mentions légales",
   description: `Mentions légales de ${business.legalName} (${business.name}), entreprise de plomberie et de chauffage à ${business.city}.`,
   alternates: { canonical: "/mentions-legales" },
-  robots: { index: true, follow: true },
+  robots: { index: !isDemo, follow: !isDemo },
 };
 
 export default function MentionsLegales() {
@@ -16,7 +15,7 @@ export default function MentionsLegales() {
     <>
       <header className="site-header">
         <div className="shell header-inner">
-          <Link className="brand" href="/" aria-label="Retour à l’accueil">
+          <a className="brand" href="/" aria-label="Retour à l’accueil">
             <span className="brand-mark" aria-hidden="true">
               <Droplets size={22} strokeWidth={2.3} />
             </span>
@@ -24,11 +23,11 @@ export default function MentionsLegales() {
               <strong>{business.name}</strong>
               <small>Plomberie &amp; chauffage</small>
             </span>
-          </Link>
-          <Link className="button button-dark legal-back" href="/">
+          </a>
+          <a className="button button-dark legal-back" href="/">
             <ArrowLeft size={18} aria-hidden="true" />
             Retour<span className="legal-back-long">&nbsp;à l’accueil</span>
-          </Link>
+          </a>
         </div>
       </header>
 
@@ -126,7 +125,7 @@ export default function MentionsLegales() {
             © {new Date().getFullYear()} {business.legalName} — SIREN {business.siren}
           </span>
           <span>
-            <Link href="/">Retour à l’accueil</Link>
+            <a href="/">Retour à l’accueil</a>
           </span>
         </div>
       </footer>

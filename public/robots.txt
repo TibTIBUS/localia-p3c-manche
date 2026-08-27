@@ -1,0 +1,5 @@
+# Demonstration temporaire hebergee sur GitHub Pages.
+# Le site definitif de l'entreprise aura son propre domaine : cette copie ne
+# doit pas etre indexee pour ne pas lui faire concurrence.
+User-agent: *
+Disallow: /

@@ -1,4 +1,3 @@
-import Link from "next/link";
 import {
   ArrowRight,
   Award,
@@ -586,7 +585,7 @@ export default function Home() {
             <a href="#services">Prestations</a>
             <a href="#qualifications">Qualifications</a>
             <a href="#contact">Contact</a>
-            <Link href="/mentions-legales">Mentions légales</Link>
+            <a href="/mentions-legales">Mentions légales</a>
           </div>
         </div>
         <div className="shell footer-bottom">
@@ -604,7 +603,7 @@ export default function Home() {
             </a>
           </span>
           <span>
-            <Link href="/mentions-legales">Mentions légales</Link>
+            <a href="/mentions-legales">Mentions légales</a>
           </span>
         </div>
       </footer>

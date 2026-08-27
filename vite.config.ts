@@ -1,5 +1,6 @@
 import vinext from "vinext";
 import { defineConfig } from "vite";
+import { deployment } from "./app/business";
 import hostingConfig from "./.openai/hosting.json";
 import { sites } from "./build/sites-vite-plugin";
 
@@ -44,6 +45,10 @@ export default defineConfig(async () => {
   const { cloudflare } = await import("@cloudflare/vite-plugin");
 
   return {
+    // GitHub Pages sert le site depuis /<nom-du-depot>/. C'est la `base` de
+    // Vite qui fait resoudre les chunks charges dynamiquement sous ce prefixe
+    // (l'option Next `basePath` casse le pre-rendu de vinext).
+    base: deployment.basePath ? `${deployment.basePath}/` : "/",
     server: {
       host: "0.0.0.0",
       allowedHosts: ["terminal.local"],

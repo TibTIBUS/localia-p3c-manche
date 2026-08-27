@@ -3,6 +3,24 @@
  * Toutes les informations affichées sur le site sont centralisées ici.
  */
 
+/**
+ * Hébergement courant du site.
+ *
+ * - "demo" : démonstration temporaire sur GitHub Pages. Le site est servi sous
+ *   un sous-chemin et n'est pas indexable (robots.txt + balise meta noindex),
+ *   pour qu'une copie provisoire ne se retrouve pas dans Google.
+ * - "prod" : domaine définitif de l'entreprise. Passer `mode` à "prod",
+ *   renseigner `url` avec le domaine, vider `basePath`, et restaurer
+ *   `app/robots.ts` / `app/sitemap.ts` (voir README).
+ */
+export const deployment = {
+  mode: "demo",
+  url: "https://tibtibus.github.io/localia-p3c-manche",
+  basePath: "/localia-p3c-manche",
+} as const;
+
+export const isDemo = deployment.mode === "demo";
+
 export const business = {
   name: "P3C Manche",
   legalName: "SARL P3C",
@@ -19,7 +37,7 @@ export const business = {
   departmentCode: "50",
   region: "Normandie",
   area: "Périers, Lessay, Coutances, Carentan, La Haye et le centre Manche",
-  url: "https://p3c-manche.fr",
+  url: deployment.url,
 } as const;
 
 /** Adresses de l'entreprise référencées à Périers (50190). */
