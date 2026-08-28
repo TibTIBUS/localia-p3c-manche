@@ -98,6 +98,12 @@ export function DemoNotice() {
           </a>
         )}
       </div>
+      {outreach.offersUrl && (
+        <a className="demo-notice-offers" href={outreach.offersUrl} target="_blank" rel="noreferrer">
+          Découvrir les offres Localia
+          <ArrowRight size={14} aria-hidden="true" />
+        </a>
+      )}
     </div>
   );
 }

@@ -27,12 +27,19 @@ export const isDemo = deployment.mode === "demo";
  * présente ce site, pas l'entreprise elle-même. Sans effet une fois
  * `deployment.mode` passé à "prod" : la bannière ne s'affiche qu'en démo.
  */
-export const outreach: { contactName: string; email: string; phone: string | null } = {
+export const outreach: {
+  contactName: string;
+  email: string;
+  phone: string | null;
+  offersUrl: string | null;
+} = {
   contactName: "Thibaut",
   email: "gestion.localia@gmail.com",
   // Numéro au format international, ex. "+33600000000", pour ajouter un CTA
   // WhatsApp. Laisser `null` pour n'afficher que l'email.
   phone: null,
+  // Lien vers les offres Localia, affiché en plus du contact direct.
+  offersUrl: "https://localiapro.fr/",
 };
 
 export const business = {

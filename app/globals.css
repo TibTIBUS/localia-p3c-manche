@@ -1075,6 +1075,22 @@ summary {
   gap: 10px;
 }
 
+.demo-notice-offers {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 14px;
+  color: var(--yellow);
+  font-size: 12.5px;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.demo-notice-offers:hover {
+  color: var(--cyan-400);
+}
+
 .demo-notice .button {
   min-height: 44px;
   padding: 11px 16px;
