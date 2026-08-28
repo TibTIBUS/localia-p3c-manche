@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { business, isDemo } from "./business";
+import { DemoNotice } from "./demo-notice";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -50,7 +51,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr">
-      <body>{children}</body>
+      <body>
+        {children}
+        <DemoNotice />
+      </body>
     </html>
   );
 }

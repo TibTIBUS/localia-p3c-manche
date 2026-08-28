@@ -21,6 +21,20 @@ export const deployment = {
 
 export const isDemo = deployment.mode === "demo";
 
+/**
+ * Coordonnées de contact affichées dans la bannière de démonstration (voir
+ * app/demo-notice.tsx) — pour que le prospect recontacte la personne qui lui
+ * présente ce site, pas l'entreprise elle-même. Sans effet une fois
+ * `deployment.mode` passé à "prod" : la bannière ne s'affiche qu'en démo.
+ */
+export const outreach: { contactName: string; email: string; phone: string | null } = {
+  contactName: "Marie",
+  email: "marie.thibaut2105@gmail.com",
+  // Numéro au format international, ex. "+33600000000", pour ajouter un CTA
+  // WhatsApp. Laisser `null` pour n'afficher que l'email.
+  phone: null,
+};
+
 export const business = {
   name: "P3C Manche",
   legalName: "SARL P3C",

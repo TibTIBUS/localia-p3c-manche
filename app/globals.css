@@ -1008,6 +1008,79 @@ summary {
   display: none;
 }
 
+/* Bandeau adressé au prospect (voir app/demo-notice.tsx), pas à ses clients :
+   ce site est une démonstration temporaire. Volontairement discret : une
+   carte flottante, pas une bannière qui bloque la page. */
+.demo-notice {
+  position: fixed;
+  z-index: 70;
+  right: 20px;
+  bottom: 20px;
+  width: min(360px, calc(100% - 40px));
+  padding: 22px 22px 20px;
+  border-radius: 18px;
+  color: var(--white);
+  background: var(--navy-950);
+  border: 1px solid rgb(244 201 93 / 0.35);
+  box-shadow: 0 24px 48px -20px rgb(6 26 45 / 0.55);
+  animation: demo-notice-in 420ms ease both;
+}
+
+@keyframes demo-notice-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+
+.demo-notice-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  color: rgb(255 255 255 / 0.7);
+  background: rgb(255 255 255 / 0.08);
+  cursor: pointer;
+  transition: background 150ms ease, color 150ms ease;
+}
+
+.demo-notice-close:hover {
+  color: var(--white);
+  background: rgb(255 255 255 / 0.16);
+}
+
+.demo-notice-title {
+  margin: 0 0 8px;
+  padding-right: 22px;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.demo-notice-body {
+  margin: 0 0 16px;
+  color: rgb(255 255 255 / 0.82);
+  font-size: 13.5px;
+  line-height: 1.65;
+}
+
+.demo-notice-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.demo-notice .button {
+  min-height: 44px;
+  padding: 11px 16px;
+  font-size: 13px;
+}
+
 a:focus-visible,
 summary:focus-visible {
   outline: 3px solid var(--yellow);
@@ -1585,6 +1658,13 @@ summary:focus-visible {
   .footer-bottom {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .demo-notice {
+    right: 12px;
+    bottom: 80px;
+    left: 12px;
+    width: auto;
   }
 
   .mobile-contact-bar {
