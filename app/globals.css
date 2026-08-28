@@ -1683,11 +1683,30 @@ summary:focus-visible {
     flex-direction: column;
   }
 
+  /* Sur petit écran la carte est resserrée : à sa taille de bureau elle
+     couvrait plus de 40% de la hauteur, en plein dans la zone du pouce. */
   .demo-notice {
     right: 12px;
     bottom: 80px;
     left: 12px;
     width: auto;
+    padding: 16px 16px 14px;
+  }
+
+  .demo-notice-body {
+    margin-bottom: 12px;
+    font-size: 12.5px;
+    line-height: 1.55;
+  }
+
+  .demo-notice-offers {
+    margin-top: 10px;
+  }
+
+  /* La barre du bas s'efface à hauteur de la section contact : la carte
+     reprend alors sa place au ras du bord. */
+  .contact-in-view .demo-notice {
+    bottom: 16px;
   }
 
   .mobile-contact-bar {
@@ -1702,6 +1721,15 @@ summary:focus-visible {
     color: var(--white);
     background: var(--navy-950);
     box-shadow: 0 -8px 24px rgb(6 26 45 / 0.2);
+    transition: transform 260ms ease;
+  }
+
+  /* Section contact déjà à l'écran : la barre est redondante et sa moitié
+     droite (ancre vers #contact) captait les balayages du pouce, renvoyant
+     sans cesse à cette même section. Voir app/sticky-bar.tsx. */
+  .contact-in-view .mobile-contact-bar {
+    transform: translateY(100%);
+    pointer-events: none;
   }
 
   .mobile-contact-bar a {
