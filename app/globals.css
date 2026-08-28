@@ -1010,7 +1010,12 @@ summary {
 
 /* Bandeau adressé au prospect (voir app/demo-notice.tsx), pas à ses clients :
    ce site est une démonstration temporaire. Volontairement discret : une
-   carte flottante, pas une bannière qui bloque la page. */
+   carte flottante, pas une bannière qui bloque la page.
+
+   Toujours présente dans le DOM (voir le composant), invisible par défaut :
+   le scroll ne fait que basculer `.is-visible`, jamais insérer l'élément.
+   Insérer un `position: fixed` en pleine gestuelle tactile faisait "rebondir"
+   Safari sur mobile — la page semblait revenir en arrière toute seule. */
 .demo-notice {
   position: fixed;
   z-index: 70;
@@ -1023,14 +1028,16 @@ summary {
   background: var(--navy-950);
   border: 1px solid rgb(244 201 93 / 0.35);
   box-shadow: 0 24px 48px -20px rgb(6 26 45 / 0.55);
-  animation: demo-notice-in 420ms ease both;
+  opacity: 0;
+  transform: translateY(16px);
+  pointer-events: none;
+  transition: opacity 320ms ease, transform 320ms ease;
 }
 
-@keyframes demo-notice-in {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
-  }
+.demo-notice.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 
 .demo-notice-close {

@@ -18,6 +18,14 @@ const SCROLL_RATIO = 0.4;
  * de la page à l'arrivée : on laisse d'abord le visiteur découvrir le site.
  */
 export function DemoNotice() {
+  // L'élément est présent dans le DOM dès le chargement (invisible), y
+  // compris quand la bannière a déjà été fermée précédemment : le scroll ne
+  // fait ensuite que basculer la classe `.is-visible`. Sur mobile, insérer un
+  // nouvel élément `position: fixed` pendant un scroll en cours (au moment
+  // précis où le seuil de 40% est franchi) faisait "rebondir" Safari — la
+  // page semblait revenir en arrière toute seule. En gardant l'élément déjà
+  // présent, le scroll ne déclenche plus qu'une transition d'opacité, sans
+  // insertion ni recalcul de mise en page pendant le geste.
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -32,6 +40,7 @@ export function DemoNotice() {
     if (dismissed) return;
 
     let shown = false;
+    let ticking = false;
     const show = () => {
       if (shown) return;
       shown = true;
@@ -41,9 +50,14 @@ export function DemoNotice() {
     };
 
     const onScroll = () => {
-      const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
-      const ratio = scrollTop / (scrollHeight - clientHeight || 1);
-      if (ratio >= SCROLL_RATIO) show();
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        ticking = false;
+        const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+        const ratio = scrollTop / (scrollHeight - clientHeight || 1);
+        if (ratio >= SCROLL_RATIO) show();
+      });
     };
 
     const timer = setTimeout(show, DELAY_MS);
@@ -55,7 +69,7 @@ export function DemoNotice() {
     };
   }, []);
 
-  if (!isDemo || !visible) return null;
+  if (!isDemo) return null;
 
   const firstName = business.manager.split(" ")[0];
   const subject = encodeURIComponent(`${business.name} — le site vous plaît ?`);
@@ -71,7 +85,12 @@ export function DemoNotice() {
   };
 
   return (
-    <div className="demo-notice" role="dialog" aria-label="À propos de cette démonstration">
+    <div
+      className={`demo-notice${visible ? " is-visible" : ""}`}
+      role="dialog"
+      aria-label="À propos de cette démonstration"
+      aria-hidden={!visible}
+    >
       <button className="demo-notice-close" onClick={dismiss} aria-label="Fermer ce message">
         <X size={16} />
       </button>
