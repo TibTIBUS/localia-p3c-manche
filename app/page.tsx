@@ -16,6 +16,7 @@ import {
   Wrench,
 } from "lucide-react";
 
+import { CompanyEmblem, CompanyMark } from "./company-emblem";
 import { addresses, business, certifications } from "./business";
 
 const services = [
@@ -166,9 +167,7 @@ export default function Home() {
       <header className="site-header">
         <div className="shell header-inner">
           <a className="brand" href="#accueil" aria-label="Retour en haut de page">
-            <span className="brand-mark" aria-hidden="true">
-              <Droplets size={22} strokeWidth={2.3} />
-            </span>
+            <CompanyMark className="brand-mark" />
             <span>
               <strong>{business.name}</strong>
               <small>Plomberie &amp; chauffage</small>
@@ -426,8 +425,13 @@ export default function Home() {
         <section className="section company-section" id="entreprise">
           <div className="shell company-layout">
             <div className="company-copy">
-              <p className="section-kicker">L’entreprise</p>
-              <h2>{business.legalName}, dirigée par {business.manager}.</h2>
+              <div className="company-heading-row">
+                <div>
+                  <p className="section-kicker">L’entreprise</p>
+                  <h2>{business.legalName}, dirigée par {business.manager}.</h2>
+                </div>
+                <CompanyEmblem className="company-seal" />
+              </div>
               <p>
                 Créée en {business.foundedYear}, {business.name} est une entreprise de plomberie et
                 de chauffage installée à {business.city}, dans la {business.department}. Nous
@@ -568,9 +572,7 @@ export default function Home() {
       <footer className="footer">
         <div className="shell footer-top">
           <div className="brand footer-brand">
-            <span className="brand-mark" aria-hidden="true">
-              <Droplets size={22} />
-            </span>
+            <CompanyMark className="brand-mark" />
             <span>
               <strong>{business.name}</strong>
               <small>Plomberie &amp; chauffage</small>

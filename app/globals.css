@@ -108,13 +108,11 @@ summary {
 }
 
 .brand-mark {
+  /* Le medaillon (voir app/company-emblem.tsx) est une illustration autonome :
+     pas de fond ni de couleur forcee, juste sa taille d'affichage. */
   width: 43px;
   height: 43px;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-  color: var(--navy-950);
-  background: var(--cyan-400);
+  flex-shrink: 0;
 }
 
 .brand > span:last-child {
@@ -135,6 +133,22 @@ summary {
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
+}
+
+/* Sceau complet (avec goutte, flamme et motifs floraux) affiché une fois,
+   en plus grand, section "L'entreprise". */
+.company-heading-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.company-seal {
+  flex-shrink: 0;
+  width: 84px;
+  height: 84px;
+  filter: drop-shadow(0 10px 20px rgb(6 26 45 / 0.18));
 }
 
 .desktop-nav {
