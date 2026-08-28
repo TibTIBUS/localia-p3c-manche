@@ -28,8 +28,8 @@ export const isDemo = deployment.mode === "demo";
  * `deployment.mode` passé à "prod" : la bannière ne s'affiche qu'en démo.
  */
 export const outreach: { contactName: string; email: string; phone: string | null } = {
-  contactName: "Marie",
-  email: "marie.thibaut2105@gmail.com",
+  contactName: "Thibaut",
+  email: "gestion.localia@gmail.com",
   // Numéro au format international, ex. "+33600000000", pour ajouter un CTA
   // WhatsApp. Laisser `null` pour n'afficher que l'email.
   phone: null,
