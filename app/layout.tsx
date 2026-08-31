@@ -5,6 +5,7 @@ import { DemoNotice } from "./demo-notice";
 import { ScrollToTop } from "./scroll-to-top";
 import { StickyBarVisibility } from "./sticky-bar";
 import "./globals.css";
+import "./p3c-brand.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(business.url),
