@@ -1,12 +1,12 @@
 /**
- * Reprise vectorielle de l'enseigne peinte sur la devanture de l'entreprise :
- * médaillon marine, clés à molette croisées, goutte d'eau, flamme et motifs
- * floraux, liseré doré. Redessinée en SVG (pas une photo) pour rester nette
- * du favicon à une grande taille.
+ * Reprise vectorielle du logo P3C Manche fourni par l'entreprise :
+ * médaillon bleu pétrole, clés croisées, goutte d'eau, flamme et motifs
+ * latéraux, avec un double liseré ivoire. Le dessin reste volontairement en
+ * SVG afin d'être parfaitement net du favicon à l'affichage grand format.
  *
- * `CompanyMark` est la version simplifiée (en-tête, pied de page, favicon) :
- * clés croisées + goutte, sans les détails qui se brouilleraient en petit.
- * `CompanyEmblem` est la version complète, utilisée une fois, en plus grand.
+ * Palette relevée sur le visuel d'origine :
+ * - médaillon : #1a3441
+ * - ivoire : #eff1d9
  */
 
 function Wrenches({ color }: { color: string }) {
@@ -16,6 +16,7 @@ function Wrenches({ color }: { color: string }) {
       <rect x="2" y="-24" width="5" height="15" rx="2" />
       <path d="M -7,-9 L 7,-9 L 2.6,-4 L -2.6,-4 Z" />
       <rect x="-2.6" y="-4" width="5.2" height="29" rx="2.6" />
+      <circle cx="0" cy="20.2" r="1.25" fill="#1a3441" />
     </g>
   );
   return (
@@ -58,38 +59,39 @@ function FourPetal({ color, transform }: { color: string; transform?: string }) 
   );
 }
 
-/** Marque simplifiée : en-tête, pied de page et favicon (voir public/favicon.svg). */
+/** Marque simplifiée : en-tête, pied de page et favicon. */
 export function CompanyMark({ className }: { className?: string }) {
-  const gold = "#f4c95d";
-  const navy = "#061a2d";
+  const cream = "#eff1d9";
+  const petrol = "#1a3441";
   return (
     <svg viewBox="0 0 64 64" className={className} role="img" aria-hidden="true">
-      <circle cx="32" cy="32" r="31" fill={navy} />
-      <circle cx="32" cy="32" r="28.5" fill="none" stroke={gold} strokeWidth="1.4" />
+      <circle cx="32" cy="32" r="31" fill={petrol} />
+      <circle cx="32" cy="32" r="28.5" fill="none" stroke={cream} strokeWidth="1.35" />
+      <circle cx="32" cy="32" r="26.2" fill="none" stroke={cream} strokeOpacity="0.7" strokeWidth="0.55" />
       <g transform="translate(32,35)">
-        <Wrenches color={gold} />
+        <Wrenches color={cream} />
       </g>
-      <Droplet color={gold} transform="translate(32,15)" />
+      <Droplet color={cream} transform="translate(32,15)" />
     </svg>
   );
 }
 
-/** Médaillon complet, repris tel qu'il figure sur la devanture. */
+/** Médaillon complet, fidèle à l'identité visuelle fournie. */
 export function CompanyEmblem({ className }: { className?: string }) {
-  const gold = "#f4c95d";
-  const navy = "#061a2d";
+  const cream = "#eff1d9";
+  const petrol = "#1a3441";
   return (
     <svg viewBox="0 0 64 64" className={className} role="img" aria-hidden="true">
-      <circle cx="32" cy="32" r="31" fill={navy} />
-      <circle cx="32" cy="32" r="28.5" fill="none" stroke={gold} strokeWidth="1.3" />
-      <circle cx="32" cy="32" r="25.5" fill="none" stroke={gold} strokeWidth="0.6" />
-      <FourPetal color={gold} transform="translate(11,33)" />
-      <FourPetal color={gold} transform="translate(53,33)" />
+      <circle cx="32" cy="32" r="31" fill={petrol} />
+      <circle cx="32" cy="32" r="28.7" fill="none" stroke={cream} strokeWidth="1.2" />
+      <circle cx="32" cy="32" r="26.1" fill="none" stroke={cream} strokeOpacity="0.72" strokeWidth="0.55" />
+      <FourPetal color={cream} transform="translate(11,33)" />
+      <FourPetal color={cream} transform="translate(53,33)" />
       <g transform="translate(32,34)">
-        <Wrenches color={gold} />
+        <Wrenches color={cream} />
       </g>
-      <Droplet color={gold} transform="translate(32,15)" />
-      <Flame color={gold} transform="translate(32,49)" />
+      <Droplet color={cream} transform="translate(32,15)" />
+      <Flame color={cream} transform="translate(32,49)" />
     </svg>
   );
 }
