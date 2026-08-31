@@ -1,24 +1,23 @@
-<!-- Reprise simplifiée de l'enseigne de l'entreprise (clés croisées + goutte). -->
+<!-- Version simplifiée du médaillon P3C Manche, aux couleurs du logo d'origine. -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <circle cx="32" cy="32" r="31" fill="#061a2d"/>
-  <circle cx="32" cy="32" r="28.5" fill="none" stroke="#f4c95d" stroke-width="1.4"/>
-  <g transform="translate(32,35)" fill="#f4c95d">
+  <circle cx="32" cy="32" r="31" fill="#1a3441"/>
+  <circle cx="32" cy="32" r="28.5" fill="none" stroke="#eff1d9" stroke-width="1.35"/>
+  <circle cx="32" cy="32" r="26.2" fill="none" stroke="#eff1d9" stroke-opacity=".7" stroke-width=".55"/>
+  <g transform="translate(32,35)" fill="#eff1d9">
     <g transform="rotate(45)">
       <rect x="-7" y="-24" width="5" height="15" rx="2"/>
       <rect x="2" y="-24" width="5" height="15" rx="2"/>
       <path d="M -7,-9 L 7,-9 L 2.6,-4 L -2.6,-4 Z"/>
       <rect x="-2.6" y="-4" width="5.2" height="29" rx="2.6"/>
+      <circle cx="0" cy="20.2" r="1.25" fill="#1a3441"/>
     </g>
     <g transform="rotate(-45)">
       <rect x="-7" y="-24" width="5" height="15" rx="2"/>
       <rect x="2" y="-24" width="5" height="15" rx="2"/>
       <path d="M -7,-9 L 7,-9 L 2.6,-4 L -2.6,-4 Z"/>
       <rect x="-2.6" y="-4" width="5.2" height="29" rx="2.6"/>
+      <circle cx="0" cy="20.2" r="1.25" fill="#1a3441"/>
     </g>
   </g>
-  <path
-    transform="translate(32,15)"
-    fill="#f4c95d"
-    d="M 0,-8 C 3,-3.4 6,0.6 6,4.6 C 6,8.8 3.3,12 0,12 C -3.3,12 -6,8.8 -6,4.6 C -6,0.6 -3,-3.4 0,-8 Z"
-  />
+  <path transform="translate(32,15)" fill="#eff1d9" d="M 0,-8 C 3,-3.4 6,0.6 6,4.6 C 6,8.8 3.3,12 0,12 C -3.3,12 -6,8.8 -6,4.6 C -6,0.6 -3,-3.4 0,-8 Z"/>
 </svg>
